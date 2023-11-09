@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 
 const RedactrForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [originalContent, setOriginalContent] = useState("");
   const [redactedContent, setRedactedContent] = useState("");
 
   const {
@@ -28,10 +29,17 @@ const RedactrForm = () => {
     const replacementChar = data.replacementChar || "*";
 
     const updatedContent = content
-    .split(" ")
-    .map((word: string) => (wordsToRedact.includes(word.toLowerCase()) ? replacementChar.repeat(word.length) : word))
-    .join(" ");
+    .replace(/[\w'-]+/gi, (word: string) =>
+        wordsToRedact.includes(word.toLowerCase())
+          ? replacementChar.repeat(word.length)
+          : word
+      );
 
+    // .split(" ")
+    // .map((word: string) => (wordsToRedact.includes(word.toLowerCase()) ? replacementChar.repeat(word.length) : word))
+    // .join(" ");
+
+    setOriginalContent(content);
     setRedactedContent(updatedContent);
 
     const stats = {
@@ -45,6 +53,7 @@ const RedactrForm = () => {
 
     setIsLoading(false);
   };
+
 
   return (
     <>
@@ -63,7 +72,7 @@ const RedactrForm = () => {
 
       <TextArea
         id="wordsToRedact"
-        label="Specify the words you wish to scramble, separate multiple words with space"
+        label="Specify the words you wish to scramble, separate words with space"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -85,14 +94,14 @@ const RedactrForm = () => {
       />
 
       {/* Display the original and redacted content */}
-      {redactedContent && (
+      {originalContent && redactedContent && (
         <>
           <hr className="bg-slate-300 w-full h-px my-4" />
           <Heading title="Results" />
 
           <div className="mb-4">
             <strong>Original Content:</strong>
-            <p>{redactedContent}</p>
+            <p>{originalContent}</p>
           </div>
 
           <div>
