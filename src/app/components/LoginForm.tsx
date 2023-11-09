@@ -1,6 +1,6 @@
 "use client";
 
-import { AiOutlineGoogle } from "react-icons/ai";
+import { AiFillTrophy } from "react-icons/ai";
 import Button from "../components/Button";
 import Heading from "../components/Heading";
 import Input from "../components/inputs/Input";
@@ -20,10 +20,6 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
   });
 
 
@@ -34,26 +30,26 @@ const LoginForm = () => {
   return (
     <>
       <Heading title="Scramble those words" />
+      <AiFillTrophy size={32} />
       <hr className="bg-slate-300 w-full h-px" />
-      <Input
-        id="content"
-        label="Content"
+      <TextArea
+        id="description"
+        label="Paste the content here.."
         disabled={isLoading}
         register={register}
         errors={errors}
         required
-        type="text"
-      ></Input>
+      />
       <TextArea
         id="description"
-        label="Description"
+        label="Specify the words you wish to scramble, separate multiple words with space"
         disabled={isLoading}
         register={register}
         errors={errors}
         required
       />
       <Button
-        label={isLoading ? "Loading..." : "Login"}
+        label={isLoading ? "Loading..." : "Redact Now"}
         onClick={handleSubmit(onSubmit)}
       />
     </>
