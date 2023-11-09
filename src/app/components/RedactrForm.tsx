@@ -54,7 +54,7 @@ const RedactrForm = () => {
     const stats = {
       wordsScanned: content.split(/\s+/).length,
       matchedWords: wordsToRedact.length,
-      charactersScrambled: updatedContent.length,
+      charactersScrambled: updatedContent.replace(/\s+/g, '').length,
     };
 
     setStats(stats);
