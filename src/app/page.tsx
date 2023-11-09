@@ -1,12 +1,12 @@
 import FormWrap from "./components/FormWrap";
 import Container from "./components/Container";
-import LoginForm from "./components/LoginForm";
+import RedactrForm from "./components/RedactrForm";
 
 export default function Home() {
   return (
     <Container>
       <FormWrap>
-        <LoginForm />
+        <RedactrForm />
       </FormWrap>
     </Container>
   )
